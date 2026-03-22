@@ -1,0 +1,11 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "eu.ansvar/spanish-competition-mcp",
+  "description": "Query CNMC (Spanish National Markets and Competition Commission) decisions, merger control cases, and sector enforcement activity under Spanish competition law (LDC)",
+  "repository": { "url": "https://github.com/Ansvar-Systems/spanish-competition-mcp", "source": "github" },
+  "homepage": "https://ansvar.eu",
+  "version": "0.1.0",
+  "license": "Apache-2.0",
+  "keywords": ["cnmc", "spanish-competition", "spain", "antitrust", "merger-control", "competition-law", "compliance", "mcp", "ansvar"],
+  "packages": [{ "registryType": "npm", "identifier": "@ansvar/spanish-competition-mcp", "version": "0.1.0", "transport": { "type": "stdio" } }]
+}
