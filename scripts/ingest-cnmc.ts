@@ -1116,17 +1116,25 @@ function extractFieldValue(
       }
     }
 
-    // Strategy 2: Table rows — look for th containing label, return adjacent td
+    // Strategy 2: Table rows — look for th containing label, return adjacent td.
+    // cheerio .each only honors `false` for early-break; returning a value from
+    // the callback is silently discarded. Capture in a closure and break.
+    let tableVal: string | undefined;
     $("th").each((_i, th) => {
       const thText = $(th).text().trim().toLowerCase();
       if (thText === label.toLowerCase() || thText === label.toLowerCase() + ":") {
         const td = $(th).next("td");
         if (td.length > 0) {
           const val = td.text().trim();
-          if (val && val.length < 2000) return val;
+          if (val && val.length < 2000) {
+            tableVal = val;
+            return false;
+          }
         }
       }
+      return;
     });
+    if (tableVal) return tableVal;
 
     // Strategy 3: Regex on raw text — "Label: value" or "Label\nvalue"
     const escaped = label.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
