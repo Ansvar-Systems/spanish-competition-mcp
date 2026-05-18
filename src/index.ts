@@ -124,11 +124,11 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         if (!decision) return errorContent(`Decision not found: ${parsed.case_number}`);
         const _citation = buildCitation(
           parsed.case_number,
-          (decision as Record<string, unknown>).title as string || parsed.case_number,
+          (decision as unknown as Record<string, unknown>).title as string || parsed.case_number,
           "es_comp_get_decision",
           { case_number: parsed.case_number },
         );
-        return textContent({ ...decision as Record<string, unknown>, _citation });
+        return textContent({ ...decision as unknown as Record<string, unknown>, _citation });
       }
       case "es_comp_search_mergers": {
         const parsed = SearchMergersArgs.parse(args);
@@ -141,11 +141,11 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         if (!merger) return errorContent(`Merger case not found: ${parsed.case_number}`);
         const _citation = buildCitation(
           parsed.case_number,
-          (merger as Record<string, unknown>).title as string || parsed.case_number,
+          (merger as unknown as Record<string, unknown>).title as string || parsed.case_number,
           "es_comp_get_merger",
           { case_number: parsed.case_number },
         );
-        return textContent({ ...merger as Record<string, unknown>, _citation });
+        return textContent({ ...merger as unknown as Record<string, unknown>, _citation });
       }
       case "es_comp_list_sectors": {
         const sectors = listSectors();
